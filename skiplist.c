@@ -50,7 +50,7 @@ int zslRandomLevel(void){
     return level > SKIPLIST_MAXLEVEL? SKIPLIST_MAXLEVEL: level;
 }
 
-skiplistnode *sklInsert(skiplist *list, double score, char *ele){
+skiplistnode *sklInsert(skiplist *list, double score,const char *ele){
     skiplistnode *update[SKIPLIST_MAXLEVEL], *x;
     unsigned int rank[SKIPLIST_MAXLEVEL];
     int i, level;

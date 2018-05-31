@@ -6,6 +6,7 @@ void main(void){
     skiplistnode *x;
     list = sklCreate();
     sklInsert(list, (double)10, "nihao");
+    return ;
     sklInsert(list, (double)15, "nihao");
     sklInsert(list, (double)20, "nihao");
     sklInsert(list, (double)50, "shijie");
