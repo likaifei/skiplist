@@ -158,14 +158,14 @@ int sklDelete(skiplist *list, double score, char *ele, skiplistnode **node){
     return 0;
 }
 
-int sklDeleteByScore(skiplist *list, double score, char *ele, skiplistnode **node){
+int sklDeleteByScore(skiplist *list, double score, skiplistnode **node){
     skiplistnode *update[SKIPLIST_MAXLEVEL], *x;
     int i;
     x = list->head;
     //从最高级别往下遍历, 找到每个级别合适的位置
     for(i = list->level - 1; i > 0; i--){
         while(x->level[i].forward &&//条件是节点存在
-                x->level[i].forward->score < score{//只比较分数
+                x->level[i].forward->score < score){//只比较分数
                     x = x->level[i].forward;
                 }
         //保存每一级的插入位置,等待更新
