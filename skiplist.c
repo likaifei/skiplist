@@ -6,7 +6,6 @@
 //创建一个节点
 skiplistnode *sklCreateNode(int level, double score, char *ele){
     skiplistnode *node = malloc(sizeof(*node) + level*sizeof(skiplistlevel));
-    node->level = 1;
     node->score = score;
     node->ele = ele;
     return node;
@@ -33,10 +32,10 @@ void sklFreeNode(skiplistnode *node){
 }
 //销毁列表
 void sklFree(skiplist *list){
-    skiplistnode *node = *list->head->forward, *next;
+    skiplistnode *node = *list->head->level[0].forward, *next;
     free(*list->head);
     while(node){
-        next = node->level[0]->forward;
+        next = node->level[0].forward;
         sklFreeNode(node);
         node = next;
     }

@@ -2,14 +2,16 @@
 #define SKIPLIST_MAXLEVEL 32
 #define SKIPLIST_P 0.25
 
+struct skiplistlevel{
+    struct skiplistnode *forward;
+    unsigned int span;
+} skiplistlevel;
+
 typedef struct skiplistnode{
     char *ele;
     double score;
     struct skiplistnode *backward;
-    struct skiplistlevel{
-        struct skiplistnode *forward;
-        unsigned int span;
-    } level[];
+    struct skiplistlevel level[];
 } skiplistnode;
 
 typedef struct skiplist{
