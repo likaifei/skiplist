@@ -1,5 +1,5 @@
 #include <math.h>
-#include <malloc/malloc.h>
+#include <malloc.h>
 #include "skiplist.h"
 #include <string.h>
 
