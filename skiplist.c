@@ -32,8 +32,8 @@ void sklFreeNode(skiplistnode *node){
 }
 //销毁列表
 void sklFree(skiplist *list){
-    skiplistnode *node = *list->head->level[0].forward, *next;
-    free(*list->head);
+    skiplistnode *node = list->head->level[0].forward, *next;
+    free(list->head);
     while(node){
         next = node->level[0].forward;
         sklFreeNode(node);
@@ -81,11 +81,11 @@ skiplistnode *sklInsert(skiplist *list, double score, char *ele){
         //更新最大层级
         list->level = level;
     }
-    x = sklCreateNode(level, scroe, ele);
+    x = sklCreateNode(level, score, ele);
     for(i = 0; i < level; i++){
         //插入
-        x->level[i].forward = update[i].forward;
-        update[i].forward = x;
+        x->level[i].forward = update[i]->level[i].forward;
+        update[i]->level[i].forward = x;
         //更新跨度
         x->level[i].span = update[i]->level[i].span - (rank[0] - rank[i]);
         update[i]->level[i].span = (rank[0] - rank[i]) + 1;
@@ -107,12 +107,12 @@ skiplistnode *sklInsert(skiplist *list, double score, char *ele){
 }
 
 //帮助删除函数
-sklDeleteNode(skiplist *list, skiplistnode *node, skiplistnode **update){
+void sklDeleteNode(skiplist *list, skiplistnode *node, skiplistnode **update){
     int i;
     for(i = 0; i < list->level; i++){
         if(update[i]->level[i].forward == node){
             update[i]->level[i].forward = node->level[i].forward;
-            update[i]->level[i].span =+ node->span - 1;
+            update[i]->level[i].span =+ node->level[i].span - 1;
         }else{
             update[i]->level[i].span --;
         }
