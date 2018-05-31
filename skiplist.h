@@ -25,5 +25,5 @@ skiplistnode *sklFindByScore(skiplist *list, double score);
 skiplistnode *sklFindByMin(skiplist *list, double min);
 skiplistnode *sklFindByMax(skiplist *list, double max);
 skiplistnode *sklInsert(skiplist *list, double score, char *ele);
-int sklDelete(skiplist *list, double score, char *ele);
-int sklDeleteByScore(skiplist *list, double score);
+int sklDelete(skiplist *list, double score, char *ele, skiplistnode **node);
+int sklDeleteByScore(skiplist *list, double score, skiplistnode **node);

@@ -27,8 +27,8 @@ void main(void){
     printf(x->ele);
     x = sklFindByMax(list, (double)52);
     printf(x->ele);
-    sklDelete(list, (double)234, "sss");
-    sklDeleteByScore(list, (double)50);
+    sklDelete(list, (double)234, "sss", NULL);
+    sklDeleteByScore(list, (double)50, NULL);
     sklFree(list);
 
 }
