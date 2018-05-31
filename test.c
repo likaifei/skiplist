@@ -15,17 +15,17 @@ void main(void){
     sklInsert(list, (double)150, "shijie");
     sklInsert(list, (double)234, "sss");
 
-    x = sklFindByScore((double)15);
+    x = sklFindByScore(list, (double)15);
     printf(x->ele);
-    x = sklFindByScore((double)11);
+    x = sklFindByScore(list, (double)11);
     printf(x->ele);
-    x = sklFindByMin((double)21);
+    x = sklFindByMin(list, (double)21);
     printf(x->ele);
-    x = sklFindByMin((double)20);
+    x = sklFindByMin(list, (double)20);
     printf(x->ele);
-    x = sklFindByMax((double)61);
+    x = sklFindByMax(list, (double)61);
     printf(x->ele);
-    x = sklFindByMax((double)52);
+    x = sklFindByMax(list, (double)52);
     printf(x->ele);
     sklDelete(list, (double)234, "sss");
     sklDeleteByScore(list, (double)50);
