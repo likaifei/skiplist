@@ -27,7 +27,7 @@ skiplist *sklCreate(void){
 }
 //销毁节点
 void sklFreeNode(skiplistnode *node){
-    free(node->ele);
+    //free(node->ele);
     free(node);
 }
 //销毁列表
@@ -50,13 +50,13 @@ int zslRandomLevel(void){
     return level > SKIPLIST_MAXLEVEL? SKIPLIST_MAXLEVEL: level;
 }
 
-skiplistnode *sklInsert(skiplist *list, double score,const char *ele){
+skiplistnode *sklInsert(skiplist *list, double score,char *ele){
     skiplistnode *update[SKIPLIST_MAXLEVEL], *x;
     unsigned int rank[SKIPLIST_MAXLEVEL];
     int i, level;
     x = list->head;
     //从最高级别往下遍历, 找到每个级别合适的位置
-    for(i = list->level - 1; i > 0; i--){
+    for(i = list->level - 1; i >= 0; i--){
         //初始化每层跨度
         rank[i] = i == (list->level - 1) ? 0 : rank[i + 1];
         while(x->level[i].forward &&//条件是节点存在
@@ -133,7 +133,7 @@ int sklDelete(skiplist *list, double score, char *ele, skiplistnode **node){
     int i;
     x = list->head;
     //从最高级别往下遍历, 找到每个级别合适的位置
-    for(i = list->level - 1; i > 0; i--){
+    for(i = list->level - 1; i >= 0; i--){
         while(x->level[i].forward &&//条件是节点存在
                 (x->level[i].forward->score < score ||//并且 分值小于要插入的分值
                 (x->level[i].forward->score = score && //或者 分值相等但是字符串小于要插入的字符串
@@ -163,7 +163,7 @@ int sklDeleteByScore(skiplist *list, double score, skiplistnode **node){
     int i;
     x = list->head;
     //从最高级别往下遍历, 找到每个级别合适的位置
-    for(i = list->level - 1; i > 0; i--){
+    for(i = list->level - 1; i >= 0; i--){
         while(x->level[i].forward &&//条件是节点存在
                 x->level[i].forward->score < score){//只比较分数
                     x = x->level[i].forward;
@@ -190,7 +190,7 @@ skiplistnode *sklFindByScore(skiplist *list, double score){
     int i;
     skiplistnode *x;
     x = list->head;
-    for(i = list->level - 1; i > 0; i--){
+    for(i = list->level - 1; i >= 0; i--){
         while(x->level[i].forward &&//条件是节点存在
                 x->level[i].forward->score < score //并且 分值小于要插入的分值
                 ){//继续往前找, 知道条件失败 就是要插入的位置
@@ -206,7 +206,7 @@ skiplistnode *sklFindByMin(skiplist *list, double score){
     int i;
     skiplistnode *x;
     x = list->head;
-    for(i = list->level - 1; i > 0; i--){
+    for(i = list->level - 1; i >= 0; i--){
         while(x->level[i].forward &&//条件是节点存在
                 x->level[i].forward->score < score //并且 分值小于要插入的分值
                 ){//继续往前找, 知道条件失败 就是要插入的位置
@@ -222,7 +222,7 @@ skiplistnode *sklFindByMax(skiplist *list, double score){
     int i;
     skiplistnode *x;
     x = list->head;
-    for(i = list->level - 1; i > 0; i--){
+    for(i = list->level - 1; i >= 0; i--){
         while(x->level[i].forward &&//条件是节点存在
                 x->level[i].forward->score < score //并且 分值小于要插入的分值
                 ){//继续往前找, 知道条件失败 就是要插入的位置
