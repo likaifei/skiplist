@@ -1,4 +1,5 @@
-
+#ifndef __SKIPLIST_H
+#define __SKIPLIST_H
 #define SKIPLIST_MAXLEVEL 32
 #define SKIPLIST_P 0.25
 
@@ -27,3 +28,4 @@ skiplistnode *sklFindByMax(skiplist *list, double max);
 skiplistnode *sklInsert(skiplist *list, double score, char *ele);
 int sklDelete(skiplist *list, double score, char *ele, skiplistnode **node);
 int sklDeleteByScore(skiplist *list, double score, skiplistnode **node);
+#endif
